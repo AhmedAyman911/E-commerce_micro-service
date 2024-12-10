@@ -1,7 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
+import NavBar from './components/navbar.jsx';
+import Checkout from './components/checkout.jsx';
+import Footer from './components/footer.jsx';
+
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      welcome to the project girls 
-    </h1>
-  )
+    <Router>
+      <NavBar/>
+        <Routes>
+          {/*user routes*/}
+          <Route path="/checkout" element={<Checkout />} />
+        </Routes>
+        <Footer/>
+    </Router>
+  );
 }
