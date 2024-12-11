@@ -13,6 +13,7 @@ export default function App() {
           {/*user routes*/}
           <Route path="/checkout" element={<Checkout />} />
         </Routes>
+        <Checkout/>
         <Footer/>
     </Router>
   );
