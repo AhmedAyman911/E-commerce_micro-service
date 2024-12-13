@@ -107,8 +107,8 @@ const Header = () => {
 
      <br></br> <br></br><br></br>
      
-     <div id="hotelTitle" className="text-3xl font-medium font-sans mb-2 mt-4">Scarfs</div>
-<div id="Hotels" className="flex items-center">
+     <div id="scarfstitle" className="text-3xl font-medium font-sans mb-2 mt-4">Scarfs</div>
+<div id="scarfs" className="flex items-center">
 
   <div className="mr-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
     <img src={sc1Image} className="rounded-3xl" alt="chiffon" />
@@ -149,7 +149,7 @@ const Header = () => {
 
 
                     <div className="text-3xl font-medium font-sans mb-2 mt-4">Inner Caps</div>
-                    <div id="flights" className="flex items-center">
+                    <div id="caps" className="flex items-center">
 
                         <div className="mr-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
                             <img src={c1Image} className="rounded-3xl w-full h-full" alt="Hotel Image" />
@@ -194,7 +194,7 @@ const Header = () => {
 
 
                     <div className="text-2xl font-medium font-sans mb-2 mt-4">Praying Isdal</div>
-<div id="cars" className="flex items-center">
+<div id="isdal" className="flex items-center">
 
   <div className="mr-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
     <img src={i1Image} className="rounded-3xl w-full h-full object-cover" alt="Hotel Image" />
