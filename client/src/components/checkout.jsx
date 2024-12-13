@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 
 export default function Checkout() {
@@ -119,3 +120,12 @@ export default function Checkout() {
     </div>
   );
 }
+=======
+export default function Checkout() {
+    return (
+      <h1 className="text-3xl font-bold underline">
+        welcome to the project girls 
+      </h1>
+    )
+  }
+>>>>>>> 59a14dd (Homepage, login, signup)
