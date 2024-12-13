@@ -20,7 +20,6 @@ import i3Image from "../../src/assets/i3.webp";
 import i4Image from "../../src/assets/i4.webp";
 
 import bgImage from "../../src/assets/bg.jpg";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Header = () => {
   return (
