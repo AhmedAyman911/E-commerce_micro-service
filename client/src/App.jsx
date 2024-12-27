@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-
 import NavBar from './components/navbar.jsx';
 import Checkout from './components/checkout.jsx';
 import Footer from './components/footer.jsx';
