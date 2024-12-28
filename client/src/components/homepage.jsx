@@ -19,6 +19,10 @@ import i2Image from "../../src/assets/i2.webp";
 import i3Image from "../../src/assets/i3.webp";
 import i4Image from "../../src/assets/i4.webp";
 import bgImage from "../../src/assets/bg.jpg";
+import e1Image from "../../src/assets/e1.webp";
+import e2Image from "../../src/assets/e2.webp";
+import e3Image from "../../src/assets/e3.webp";
+import e4Image from "../../src/assets/e4.webp";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -191,6 +195,49 @@ const Header = () => {
           </button>
       </div>
       <br></br>
+      <div className="text-2xl font-medium font-sans mb-2 mt-4">Essentials</div>
+<div id="isdal" className="flex items-center">
+
+  <div className="mr-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
+    <img src={e1Image} className="rounded-3xl w-full h-full object-cover" alt="Hotel Image" />
+    <div className="p-4 text-center font-sans">
+    Pin Box
+    <br />
+    </div>
+  </div>
+
+  <div className="m-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
+    <img src={e2Image} className="rounded-3xl w-full h-full object-cover" alt="Hotel Image" />
+    <div className="p-4 text-center font-sans">
+    Double Sided Tape
+    <br />
+    </div>
+  </div>
+
+  <div className="m-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
+    <img src={e3Image} className="rounded-3xl w-full h-full object-cover" alt="Hotel Image" />
+    <div className="p-4 text-center font-sans">
+    Scarf Straightener
+    <br />
+    </div>
+  </div>
+
+  <div className="m-5 border border-gray-300 rounded-3xl flex flex-col items-center hover:border-pink-500" style={{ width: "350px", height: "400px" }}>
+    <img src={e4Image} className="rounded-3xl w-full h-full object-cover" alt="Hotel Image" />
+    <div className="p-4 text-center font-sans">
+    Matte Magnet Pin
+      <br />
+    </div>
+  </div>
+</div>
+<br></br><br></br>
+<div className="flex justify-center mt-4">
+          <button onClick={() => handleViewAll('Essentials')} className="py-4 px-8 bg-pink-700 text-white font-semibold rounded-2xl hover:bg-pink-400">
+            View All
+          </button>
+      </div>
+      <br></br><br></br>
+
                 </div>
             </div>
        </>
