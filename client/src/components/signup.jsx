@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import loginImage from '../assets/bwink_bld_03_single_03.jpg'; // Import your image
+import { faEnvelope, faLock, faPhone } from '@fortawesome/free-solid-svg-icons';
+import loginImage from '../assets/bwink_bld_03_single_03.jpg';
+import axios from 'axios';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '', // Added phone field
     password: '',
     confirmPassword: '',
   });
 
   const [error, setError] = useState(''); // State to store error message
-
+  const [success, setSuccess] = useState('');
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if passwords match
@@ -26,7 +28,25 @@ export default function Signup() {
       setError('Passwords do not match');
       return;
     }
+    try {
+      // Make the API call to signup endpoint
+      const response = await axios.post('http://localhost:3000/auth/signup', {
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phone,
+        name: formData.name,
+      });
 
+      // Handle success
+      setSuccess('Account created successfully!');
+      setError(''); // Clear error message
+      console.log('Response:', response.data);
+    } catch (err) {
+      // Handle error
+      setError(err.response?.data?.message || 'An error occurred during signup');
+      setSuccess(''); // Clear success message
+      console.error('Error:', err);
+    }
     // Add your form submission logic here
     console.log('Form Submitted:', formData);
     setError(''); // Clear error if passwords match
@@ -95,6 +115,28 @@ export default function Signup() {
               </div>
             </div>
 
+            {/* Phone Number Input */}
+            <div className="mb-6">
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
+                Phone Number
+              </label>
+              <div className="relative mt-1">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                  <FontAwesomeIcon icon={faPhone} />
+                </span>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your phone number"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                />
+              </div>
+            </div>
+
             {/* Password Input */}
             <div className="mb-6">
               <label htmlFor="password" className="block text-sm font-medium text-gray-300">
@@ -140,9 +182,10 @@ export default function Signup() {
             </div>
 
             {/* Error Message */}
-            {error && (
-              <p className="text-red-500 text-center mb-4">{error}</p>
-            )}
+            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+            {/* Success Message */}
+            {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
             {/* Submit Button */}
             <button

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import axios from 'axios'; // Import Axios for HTTP requests
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import loginImage from '../assets/bwink_bld_03_single_03.jpg'; // Import your image
@@ -6,11 +7,33 @@ import loginImage from '../assets/bwink_bld_03_single_03.jpg'; // Import your im
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    setLoading(true); // Start loading
+    setError(''); // Clear previous errors
+
+    try {
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        email,
+        password,
+      });
+
+      // Handle successful login
+      console.log('Login successful:', response.data);
+
+      // Save token or redirect as needed
+      localStorage.setItem('token', response.data.access_token);
+      window.location.href = '/profile'; // Redirect to dashboard
+    } catch (err) {
+      // Handle login error
+      console.error('Login error:', err.response?.data || err.message);
+      setError(err.response?.data?.message || 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false); // Stop loading
+    }
   };
 
   return (
@@ -33,6 +56,8 @@ export default function Login() {
           <p className="text-center text-gray-400 mb-6">
             Log in to access your account
           </p>
+
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
           <form onSubmit={handleLogin}>
             {/* Email Input */}
@@ -81,13 +106,14 @@ export default function Login() {
             <button
               type="submit"
               className="w-full bg-black text-white py-3 px-4 rounded-md text-lg font-semibold border border-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
+              disabled={loading}
             >
-              Login
+              {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
 
           <p className="text-center text-gray-400 mt-6">
-            Don't have an account?{' '}
+            Don`t have an account?{' '}
             <a href="/signup" className="text-white underline hover:text-gray-400">
               Sign up
             </a>
