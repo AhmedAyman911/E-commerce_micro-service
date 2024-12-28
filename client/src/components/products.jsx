@@ -52,7 +52,7 @@ export default function Products() {
             {products.map((product) => (
               <div
               key={product._id}
-              className="group border rounded-lg p-4 bg-gray-50 hover:shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out hover:bg-pink-600"
+              className="group border rounded-lg p-4 bg-gray-50 hover:shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out hover:bg-pink-500"
             >
               <Link to={`/product/${product._id}`}>
                 <img
