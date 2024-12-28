@@ -1,21 +1,22 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable */
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import * as dotenv from 'dotenv'; // Import dotenv
+dotenv.config(); // Load environment variables
 
 @Module({
-  imports: [ProductModule,AuthModule,UserModule,
-    ConfigModule.forRoot({
-      isGlobal: true, // Makes environment variables globally available
-    }),
-    MongooseModule.forRoot(process.env.DATABASE_URI, 
-      { connectionName: 'database' }),
-   ],
+  imports: [
+    MongooseModule.forRoot(process.env.DB), // Connect to MongoDB
+    ProductModule,AuthModule,UserModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

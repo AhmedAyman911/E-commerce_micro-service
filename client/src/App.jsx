@@ -6,10 +6,8 @@ import Products from './components/products.jsx';
 import Signup from './components/signup.jsx';
 import Profile from './components/profile.jsx';
 import Login from './components/login.jsx';
-
-
-
-
+import ProductPage from './components/product.jsx';
+import Header from './components/homepage.jsx';
 export default function App() {
   
   return (
@@ -22,6 +20,9 @@ export default function App() {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Header />} />
         </Routes>
         <Footer/>
     </Router>
