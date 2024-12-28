@@ -13,7 +13,7 @@ dotenv.config(); // Load environment variables
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.DB), // Connect to MongoDB
+    MongooseModule.forRoot(process.env.DB),
     ProductModule,AuthModule,UserModule
   ],
   controllers: [AppController],

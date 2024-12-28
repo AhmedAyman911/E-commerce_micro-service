@@ -9,7 +9,7 @@ import { ObjectId } from 'mongodb';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User.name, 'database') private readonly UserModel: Model<User>,
+    @InjectModel(User.name) private readonly UserModel: Model<User>,
   ) { }
 
   async getUserById(userId: string): Promise<User> {
