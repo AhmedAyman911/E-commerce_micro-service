@@ -20,26 +20,7 @@ export default function ProductPage() {
             TWILIGHT EMBROIDERED LINEN SCARF
           </h1>
           <p className="text-xl text-gray-600 mt-4">LE 420.00</p>
-          <p className="text-sm text-gray-500 mt-1">Shipping calculated at checkout.</p>
-
-          {/* Image Thumbnails */}
-          <div className="mt-6 grid grid-cols-3 gap-4">
-            <img
-              src="https://levoilestores.com/cdn/shop/files/10413097401298.jpg?v=1728213741&width=900"
-              alt="Thumbnail 1"
-              className="w-30 h-30 rounded-lg shadow-md cursor-pointer hover:opacity-80"
-            />
-            <img
-              src="https://levoilestores.com/cdn/shop/files/10413097403198.jpg?v=1728213735&width=900"
-              alt="Thumbnail 2"
-              className="w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80"
-            />
-            <img
-              src="https://levoilestores.com/cdn/shop/files/10413097421798.jpg?v=1728213763&width=900"
-              alt="Thumbnail 3"
-              className="w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80"
-            />
-          </div>
+          <p className="text-base text-gray-500 mt-1">Shipping calculated at checkout.</p>
 
           <div className="flex items-center space-x-2 mt-4">
             <span className="text-green-500 text-sm font-medium">● In stock, ready to ship</span>

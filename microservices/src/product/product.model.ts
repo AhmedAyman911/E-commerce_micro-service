@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import { Schema,Document,model } from 'mongoose';
+import { Schema, Document } from 'mongoose';
 
 export interface Product extends Document {
   readonly name: string;
@@ -8,33 +7,41 @@ export interface Product extends Document {
   readonly material: string;
   readonly type: string;
   readonly dimensions: string;
+  readonly image: string;
 }
 
-export const ProductSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: String,
-    required: true,
-  },
-  stock: {
-    type: String,
-    required: true,
-  },
-  material:
+export const ProductSchema = new Schema(
   {
-    type: String,
-    required: true,
+    name: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: String,
+      required: true,
+    },
+    stock: {
+      type: String,
+      required: true,
+    },
+    material: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    dimensions: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
   },
-  type:
   {
-    type: String,
-    required: true,
-  },
-  dimensions: {
-    type: String,
-    required: true,
+    collection: 'products', // Explicitly set the collection name
   }
-});
+);
