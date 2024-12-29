@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Controller, Post, Put, Get, Delete, Body, Param, Patch, HttpException, NotFoundException, HttpStatus } from '@nestjs/common';
 import { CartService } from './cart.service';
 
@@ -107,3 +106,4 @@ async removeItem(
 async clearCart(@Param('uid') uid: string) {
   return this.cartService.clearCart(uid);
 }*/
+

@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Header />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/cart/:userid" element={<Cart />} />
+
         </Routes>
         <Footer/>
     </Router>

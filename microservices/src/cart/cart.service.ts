@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Injectable, Inject, NotFoundException,BadRequestException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
