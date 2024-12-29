@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable */
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
