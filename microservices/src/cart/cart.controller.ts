@@ -1,64 +1,109 @@
 /* eslint-disable prettier/prettier */
-import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
-  Param,
-  Body,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Post, Put, Get, Delete, Body, Param, Patch, HttpException, NotFoundException, HttpStatus } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CartItem } from './cart.model';
+
 
 @Controller('cart')
 export class CartController {
-  constructor(private readonly cartService: CartService) {}
-
-  // Get cart for a specific user
-  @Get(':userId')
-  async getCart(@Param('userId') userId: string) {
-    try {
-      const cart = await this.cartService.getCart(userId);
-      return cart || { userId, items: [] }; // Return empty cart if not found
-    } catch (error) {
-      throw new HttpException('Error retrieving cart', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+  constructor(private readonly cartService: CartService) { }
+  @Post(':uid/create')
+  async createCartt(@Param('uid') uid: string) {
+    return this.cartService.createCartt(uid);
   }
 
-  // Add an item to the cart
-  @Post(':userId')
-  async addToCart(@Param('userId') userId: string, @Body() item: CartItem) {
-    try {
-      return await this.cartService.addToCart(userId, item);
-    } catch (error) {
-      throw new HttpException('Error adding to cart', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  // Update quantity of a cart item
-  @Patch(':userId/item/:productId')
-  async updateCartItem(
-    @Param('userId') userId: string,
-    @Param('productId') productId: string,
-    @Body('quantity') quantity: number,
+  @Put(':uid/update')
+  async updateCart(
+    @Param('uid') uid: string,
+    @Body() product: { productId: string; name: string; quantity: number; price: number; photo: string },
   ) {
-    try {
-      return await this.cartService.updateCartItem(userId, productId, quantity);
-    } catch (error) {
-      throw new HttpException('Error updating cart item', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return this.cartService.updateCart(uid, product);
   }
 
-  // Remove an item from the cart
-  @Delete(':userId/item/:productId')
-  async removeFromCart(@Param('userId') userId: string, @Param('productId') productId: string) {
+  @Get(':uid')
+  async getCart(@Param('uid') uid: string) {
+    const cart = await this.cartService.getCartByUserId(uid);
+    if (!cart) {
+      throw new NotFoundException('Cart not found for this user.');
+    }
+    return cart;
+  }
+
+  @Delete(':uid/items/:productId')
+  async deleteItem(
+    @Param('uid') uid: string,
+    @Param('productId') productId: string,
+  ) {
+    const updatedCart = await this.cartService.deleteItemFromCart(uid, productId);
+    if (!updatedCart) {
+      throw new NotFoundException('Item not found in cart.');
+    }
+    return updatedCart;
+  }
+  @Put(':uid/:itemId/increase')
+  async increaseQuantity(
+    @Param('uid') uid: string,
+    @Param('itemId') itemId: string,
+    @Body('amount') amount: number = 1,
+  ) {
+    return this.cartService.increaseQuantity(uid, itemId, amount);
+  }
+
+  @Put(':uid/:itemId/decrease')
+  async decreaseQuantity(
+    @Param('uid') uid: string,
+    @Param('itemId') itemId: string,
+    @Body('amount') amount: number = 1,
+  ) {
+    return this.cartService.decreaseQuantity(uid, itemId, amount);
+  }
+
+}
+
+/*
+  @Post()
+  async createOrder(@Body() cartData: Partial<Cart>): Promise<Cart> {
     try {
-      return await this.cartService.removeFromCart(userId, productId);
+      return await this.cartService.createCart(cartData);
     } catch (error) {
-      throw new HttpException('Error removing from cart', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to create cart', HttpStatus.BAD_REQUEST);
     }
   }
+  @Get()
+  async getAllCarts(): Promise<Cart[]> {
+    console.log('Fetching all Cartss...');
+    return await this.cartService.getAllCarts();
+  }*/
+
+
+/*
+@Get(':uid')
+async getCart(@Param('uid') uid: string) {
+  return this.cartService.getCartByUserId(uid);
 }
+
+@Patch(':uid/add')
+async addItem(
+  @Param('uid') uid: string,
+  @Body('item') item: {
+    productId: string;
+    name: string;
+    quantity: number;
+    price: number;
+    photo: string;
+  },
+) {
+  return this.cartService.addItemToCart(uid, item);
+}
+
+@Patch(':uid/remove/:productId')
+async removeItem(
+  @Param('uid') uid: string,
+  @Param('productId') productId: string,
+) {
+  return this.cartService.removeItemFromCart(uid, productId);
+}
+
+@Delete(':uid/clear')
+async clearCart(@Param('uid') uid: string) {
+  return this.cartService.clearCart(uid);
+}*/

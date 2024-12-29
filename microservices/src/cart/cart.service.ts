@@ -1,51 +1,178 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, Inject, NotFoundException,BadRequestException } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { CartItem, CartDocument } from './cart.model';  // We import CartItem and CartDocument, not Cart itself
+import { InjectModel } from '@nestjs/mongoose';
+import { Cart } from './cart.model';
 
 @Injectable()
 export class CartService {
-  constructor(@InjectModel('Cart') private readonly cartModel: Model<CartDocument>) {}  // Use 'Cart' instead of Cart
 
-  // Get cart for a specific user
-  async getCart(userId: string): Promise<CartDocument | null> {
-    return this.cartModel.findOne({ userId }).exec();  // Use cartModel to interact with Mongoose
+  constructor(
+    @InjectModel('Cart') private readonly cartModel: Model<Cart>,
+  ) { }
+  /*
+    async createCart(cartData: Partial<Cart>): Promise<Cart> {
+      const cart = new this.cartModel(cartData);
+      return await cart.save();
+    }*/
+
+  async getAllCarts(): Promise<Cart[]> {
+    return await this.cartModel.find().exec();
   }
 
-  // Add an item to the cart
-  async addToCart(userId: string, item: CartItem): Promise<CartDocument> {
-    const existingCart = await this.cartModel.findOne({ userId });
+  async createCartt(uid: string): Promise<Cart> {
+    const existingCart = await this.cartModel.findOne({ uid }).exec();
+
     if (existingCart) {
-      existingCart.items.push(item);
-      return existingCart.save();  // Saving the updated cart document
+      throw new Error('Cart already exists for this user.');
+    }
+
+    const newCart = new this.cartModel({ uid, items: [] });
+    return await newCart.save();
+  }
+
+  async getCartByUserId(uid: string): Promise<Cart> {
+    const cart = await this.cartModel.findOne({ uid }).exec();
+    if (!cart) {
+      throw new NotFoundException('Cart not found for this user.');
+    }
+    return cart;
+  }
+
+  async deleteItemFromCart(uid: string, productId: string): Promise<Cart> {
+    const cart = await this.cartModel.findOne({ uid }).exec();
+
+    if (!cart) {
+      throw new NotFoundException('Cart not found for this user.');
+    }
+
+    // Find the item to remove
+    const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+
+    if (itemIndex === -1) {
+      throw new NotFoundException('Item not found in cart.');
+    }
+
+    // Remove the item from the cart
+    cart.items.splice(itemIndex, 1);
+
+    return cart.save();
+  }
+
+
+  async updateCart(uid: string, product: any): Promise<Cart> {
+    const cart = await this.cartModel.findOne({ uid }).exec();
+
+    if (!cart) {
+      throw new NotFoundException('Cart not found for the user.');
+    }
+
+    const existingProduct = cart.items.find(
+      (item) => item.productId.toString() === product.productId,
+    );
+
+    if (existingProduct) {
+      existingProduct.quantity += product.quantity; // Update quantity
     } else {
-      const newCart = new this.cartModel({ userId, items: [item] });
-      return newCart.save();  // Creating a new cart if not found
+      cart.items.push(product); // Add new product
     }
+
+    return cart.save();
+  }
+  async increaseQuantity(uid: string, productId: string, amount: number): Promise<Cart> {
+    const cart = await this.getCartByUserId(uid);
+
+    const product = cart.items.find(
+      (item) => item.productId.toString() === productId,
+    );
+
+    if (!product) {
+      throw new NotFoundException('Item not found in the cart.');
+    }
+
+    product.quantity += amount;
+    return cart.save();
   }
 
-  // Update quantity of a cart item
-  async updateCartItem(userId: string, productId: string, quantity: number): Promise<CartDocument | null> {
-    const existingCart = await this.cartModel.findOne({ userId });
-    if (existingCart) {
-      const item = existingCart.items.find((item) => item.productId === productId);
-      if (item) {
-        item.quantity = quantity;
-        return existingCart.save();  // Saving the updated cart document
-      }
+  async decreaseQuantity(uid: string, productId: string, amount: number): Promise<Cart> {
+    const cart = await this.getCartByUserId(uid);
+
+    const product = cart.items.find(
+      (item) => item.productId.toString() === productId,
+    );
+
+    if (!product) {
+      throw new NotFoundException('Item not found in the cart.');
     }
-    return null;  // If no cart or item found
+
+    if (product.quantity - amount < 0) {
+      throw new BadRequestException('Quantity cannot be less than zero.');
+    }
+
+    product.quantity -= amount;
+    return cart.save();
   }
 
-  // Remove an item from the cart
-  async removeFromCart(userId: string, productId: string): Promise<CartDocument | null> {
-    const cart = await this.cartModel.findOne({ userId });
-    if (cart) {
-      cart.items = cart.items.filter(item => item.productId !== productId);
-      return cart.save();
-    }
-    return null; // Return null if no cart was found for the user
-  }
-  
+
+
+
+
+
+
+
+
+
 }
+
+
+
+/*
+async getCartByUserId(uid: string): Promise<Cart> {
+  const cart = await this.cartModel.findOne({ uid }).exec();
+  if (!cart) {
+    throw new NotFoundException('Cart not found');
+  }
+  return cart;
+}
+
+async addItemToCart(uid: string, item: any): Promise<Cart> {
+  const cart = await this.cartModel.findOne({ uid }).exec();
+  if (!cart) {
+    throw new NotFoundException('Cart not found');
+  }
+
+  const existingItem = cart.items.find(
+    (i) => i.productId.toString() === item.productId,
+  );
+
+  if (existingItem) {
+    existingItem.quantity += item.quantity;
+  } else {
+    cart.items.push(item);
+  }
+
+  return cart.save();
+}
+
+async removeItemFromCart(uid: string, productId: string): Promise<Cart> {
+  const cart = await this.cartModel.findOne({ uid }).exec();
+  if (!cart) {
+    throw new NotFoundException('Cart not found');
+  }
+
+  cart.items = cart.items.filter(
+    (item) => item.productId.toString() !== productId,
+  );
+
+  return cart.save();
+}
+
+async clearCart(uid: string): Promise<Cart> {
+  const cart = await this.cartModel.findOne({ uid }).exec();
+  if (!cart) {
+    throw new NotFoundException('Cart not found');
+  }
+
+  cart.items = [];
+  return cart.save();
+}*/
