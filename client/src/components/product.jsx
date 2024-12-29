@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function ProductPage() {
   return (
@@ -52,7 +51,7 @@ export default function ProductPage() {
                 FABRIC CARE
               </summary>
               <div className="px-4 py-2 text-gray-600">
-                Our products are made from delicate fabrics, so it’s important to handle them with care. Hand wash gently without scrubbing or twisting separately in cold water with Downy. Do not soak. Do not use bleach or shear pins when styling it. We highly recommend dry cleaning only. Due to the extreme lightness of the fabric. For spot cleaning, make sure that when the product is wet, different colors don't touch each other until it is completely dry. To avoid color transfer, iron at medium heat.
+                Our products are made from delicate fabrics, so it’s important to handle them with care. Hand wash gently without scrubbing or twisting separately in cold water with Downy. Do not soak. Do not use bleach or shear pins when styling it. We highly recommend dry cleaning only. Due to the extreme lightness of the fabric. For spot cleaning, make sure that when the product is wet, different colors dont touch each other until it is completely dry. To avoid color transfer, iron at medium heat.
               </div>
             </details>
             <details className="group border-t border-gray-300">
