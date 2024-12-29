@@ -59,16 +59,21 @@ export default function ProductPage() {
           <p className="text-base text-gray-500 mt-1">Shipping calculated at checkout.</p>
 
           <div className="flex items-center space-x-2 mt-4">
-            <span
-              className={`text-lg font-medium ${product.stock.startsWith("Low stock")
-                ? "text-yellow-500"
-                : product.stock.startsWith("In stock")
-                ? "text-green-500"
-                : "text-red-500" 
-               }`}>
-             {product.stock}
-            </span>
-          </div>
+  <span
+    className={`text-lg font-medium ${
+      product.stock.startsWith("Low stock")
+        ? "text-yellow-500"
+        : product.stock.startsWith("In stock")
+        ? "text-green-500"
+        : "text-red-500"
+    }`}
+  >
+    {product.stock.startsWith("Low stock")
+      ? `${product.stock}${product.n_items} items left`
+      : product.stock}
+  </span>
+</div>
+
 
           <div className="mt-6">
             <button className="w-full py-3 px-6 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition">
@@ -88,7 +93,7 @@ export default function ProductPage() {
         )}
         {product.dimensions && (
           <p className="text-gray-800 text-lg">
-            <strong>Dimension:</strong> {product.dimensions}
+            <strong>Dimensions:</strong> {product.dimensions}
           </p>
         )}
       </div>
