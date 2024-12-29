@@ -8,6 +8,7 @@ export interface Product extends Document {
   readonly type: string;
   readonly dimensions: string;
   readonly image: string;
+  readonly n_items: string;
 }
 
 export const ProductSchema = new Schema(
@@ -37,6 +38,10 @@ export const ProductSchema = new Schema(
       required: true,
     },
     image: {
+      type: String,
+      required: true,
+    },
+    n_items: {
       type: String,
       required: true,
     },

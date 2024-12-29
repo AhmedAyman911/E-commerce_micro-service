@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -41,22 +42,29 @@ export default function Products() {
         <h2 className="text-2xl font-bold px-4 py-2">
           {type ? `${type}` : 'All Products'}
         </h2>
+        <br></br>
         {loading ? (
           <p className="text-gray-700">Loading products...</p>
         ) : error ? (
           <p className="text-red-500">Error: {error}</p>
         ) : products.length > 0 ? (
-          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
             {products.map((product) => (
-              <div key={product._id} className="group border rounded-lg p-4 bg-gray-50">
+              <div
+              key={product._id}
+              className="group border rounded-lg p-4 bg-gray-50 hover:shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out hover:bg-pink-500"
+            >
+              <Link to={`/product/${product._id}`}>
                 <img
                   alt={product.name}
                   src={product.image}
-                  className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75"
+                  className="aspect-square w-full rounded-lg bg-gray-200 object-cover"
                 />
                 <h3 className="mt-4 text-lg font-medium text-gray-900">{product.name}</h3>
                 <p className="mt-1 text-base text-gray-800">{product.price}</p>
-              </div>
+              </Link>
+            </div>
+            
             ))}
           </div>
         ) : (
