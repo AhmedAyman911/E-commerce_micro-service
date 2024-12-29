@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
->>>>>>> ca4ca55ac70e0c39cdb74beef931f839b219ba6e
 
 export default function ProductPage() {
   const { id } = useParams(); // Get product ID from URL parameters
@@ -107,13 +104,8 @@ export default function ProductPage() {
               <summary className="px-4 py-2 text-lg font-medium cursor-pointer group-hover:text-pink-700">
                 FABRIC CARE
               </summary>
-<<<<<<< HEAD
-              <div className="px-4 py-2 text-gray-600">
-                Our products are made from delicate fabrics, so it’s important to handle them with care. Hand wash gently without scrubbing or twisting separately in cold water with Downy. Do not soak. Do not use bleach or shear pins when styling it. We highly recommend dry cleaning only. Due to the extreme lightness of the fabric. For spot cleaning, make sure that when the product is wet, different colors dont touch each other until it is completely dry. To avoid color transfer, iron at medium heat.
-=======
               <div className="px-4 py-2 text-gray-700 text-base">
-              Our products are made from delicate fabrics, so it’s important to handle them with care. Hand wash gently without scrubbing or twisting separately in cold water with Downy. Do not soak. Do not use bleach or shear pins when styling it. We highly recommend dry cleaning only. Due to the extreme lightness of the fabric. For spot cleaning, make sure that when the product is wet, different colors don't touch each other until it is completely dry. To avoid color transfer, iron at medium heat.
->>>>>>> ca4ca55ac70e0c39cdb74beef931f839b219ba6e
+              Our products are made from delicate fabrics, so it’s important to handle them with care. Hand wash gently without scrubbing or twisting separately in cold water with Downy. Do not soak. Do not use bleach or shear pins when styling it. We highly recommend dry cleaning only. Due to the extreme lightness of the fabric. For spot cleaning, make sure that when the product is wet, different colors don`t touch each other until it is completely dry. To avoid color transfer, iron at medium heat.
               </div>
             </details>
             <details className="group border-t border-gray-300">
