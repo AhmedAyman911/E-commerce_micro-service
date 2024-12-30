@@ -4,11 +4,11 @@ import { getUserData, isTokenValid } from "../tokenUtils.js";
 import axios from "axios";
 
 export default function ProductPage() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -50,20 +50,23 @@ export default function ProductPage() {
     const payload = {
       productId: product._id,
       name: product.name,
-      quantity: 1, 
+      quantity: 1,
       price: numericPrice,
       photo: product.image,
     };
-  
+
     console.log("Sending payload:", payload);
-  
+
     try {
       const response = await axios.put(
         `http://localhost:3000/cart/${user.userId}/update`,
         payload
       );
-  
+
       console.log("Response from server:", response.data);
+      // Show snackbar on successful addition
+      setSnackbarVisible(true);
+      setTimeout(() => setSnackbarVisible(false), 3000);
     } catch (error) {
       if (error.response) {
         console.error("Error response data:", error.response.data);
@@ -81,7 +84,7 @@ export default function ProductPage() {
 
   const buyItNow = async () => {
     await addToCart();
-    navigate("/checkout"); 
+    navigate("/checkout");
   };
 
   if (loading) {
@@ -115,13 +118,12 @@ export default function ProductPage() {
 
           <div className="flex items-center space-x-2 mt-4">
             <span
-              className={`text-lg font-medium ${
-                product.stock.startsWith("Low stock")
+              className={`text-lg font-medium ${product.stock.startsWith("Low stock")
                   ? "text-yellow-500"
                   : product.stock.startsWith("In stock")
-                  ? "text-green-500"
-                  : "text-red-500"
-              }`}
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
             >
               {product.stock.startsWith("Low stock")
                 ? `${product.stock} ${product.n_items} items left`
@@ -136,6 +138,13 @@ export default function ProductPage() {
             >
               ADD TO CART
             </button>
+            {snackbarVisible && (
+              <div
+                className="fixed top-16 right-4 bg-green-500 text-white py-2 px-4 rounded shadow-md animate-fade-in-out"
+              >
+                Added to cart successfully!
+              </div>
+            )}
             <button
               className="w-full py-3 px-6 bg-pink-700 text-white font-semibold rounded-lg hover:bg-pink-500 transition mt-3"
               onClick={buyItNow}
