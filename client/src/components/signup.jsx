@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faPhone } from '@fortawesome/free-solid-svg-icons';
 import signupImage from '../assets/bwink_bld_03_single_03.jpg';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 export default function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,6 +42,7 @@ export default function Signup() {
       setSuccess('Account created successfully!');
       setError(''); // Clear error message
       console.log('Response:', response.data);
+      navigate(`/login`);
     } catch (err) {
       // Handle error
       setError(err.response?.data?.message || 'An error occurred during signup');

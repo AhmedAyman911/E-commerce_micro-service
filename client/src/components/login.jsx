@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import loginImage from '../assets/bwink_bld_03_single_03.jpg'; // Import your image
 import { getUserData, isTokenValid } from '../tokenUtils.js';
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true); // Start loading
@@ -38,7 +40,7 @@ export default function Login() {
         headers: { Authorization: `Bearer ${token}` }, // Pass the token in the headers
       }
     );
-      window.location.href = '/profile'; // Redirect to dashboard
+    navigate("/");
     } catch (err) {
       // Handle login error
       console.error('Login error:', err.response?.data || err.message);

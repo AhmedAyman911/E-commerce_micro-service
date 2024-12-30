@@ -40,12 +40,12 @@ const Header = () => {
     <>
       <div className="pl-20 justify-center">
         {/* Hero Section */}
-        <div id="exclusive" className="mt-16">
+        <div id="exclusive" className="mt-16 justify-items-center">
           <div
             id="custom-offerPic"
             className="border rounded-3xl overflow-hidden mt-8 relative"
             style={{
-              width: "95%",
+              width: "80%",
               height: "600px", // Explicit height for alignment
               borderRadius: "30px",
             }}

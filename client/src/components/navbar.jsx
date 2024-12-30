@@ -66,6 +66,12 @@ export default function NavBar() {
                         Home
                     </button>
                     <button
+                        onClick={() => handleNavigation("/products")}
+                        className="block hover:text-gray-400 text-3xl py-8 text-left w-full"
+                    >
+                        Our Products
+                    </button>
+                    <button
                         onClick={() => handleNavigation("/products?type=Scarfs")}
                         className="block hover:text-gray-400 text-3xl py-8 text-left w-full"
                     >

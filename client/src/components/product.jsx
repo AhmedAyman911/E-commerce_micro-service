@@ -84,8 +84,9 @@ export default function ProductPage() {
     }
   };
 
-  const buyItNow = () => {
-    navigate("/checkout");
+  const buyItNow = async () => {
+    await addToCart();
+    navigate("/checkout"); 
   };
 
   if (loading) {
