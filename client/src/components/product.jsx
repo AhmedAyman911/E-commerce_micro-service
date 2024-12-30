@@ -63,7 +63,7 @@ export default function ProductPage() {
       );
 
       console.log("Response from server:", response.data);
-      alert("Product added to cart successfully!");
+      //alert("Product added to cart successfully!");
     } catch (error) {
       if (error.response) {
         // Server responded with a status code outside the range of 2xx
@@ -110,7 +110,6 @@ export default function ProductPage() {
         <div className="flex flex-col">
           <h1 className="text-3xl font-bold text-gray-800">{product.name}</h1>
           <p className="text-xl text-gray-800 mt-4">{product.price}</p>
-          <p className="text-base text-gray-500 mt-1">Shipping calculated at checkout.</p>
 
           <div className="flex items-center space-x-2 mt-4">
             <span
@@ -122,7 +121,7 @@ export default function ProductPage() {
                 }`}
             >
               {product.stock.startsWith("Low stock")
-                ? `${product.stock} (${product.n_items} items left)`
+                ? `${product.stock} ${product.n_items} items left`
                 : product.stock}
             </span>
           </div>

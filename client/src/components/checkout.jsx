@@ -214,7 +214,7 @@ export default function Checkout() {
               />
               Cash on Delivery
             </label>
-            <label className="flex items-center gap-2">
+            {/* <label className="flex items-center gap-2">
               <input
                 type="radio"
                 name="payment"
@@ -223,7 +223,7 @@ export default function Checkout() {
                 onChange={() => setPaymentMethod("card")}
               />
               Pay with Card
-            </label>
+            </label> */}
           </div>
           <button
             type="submit"
