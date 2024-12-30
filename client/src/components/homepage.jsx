@@ -11,7 +11,6 @@ const Header = () => {
   const [isdals, setIsdals] = useState([]);
   const [essentials, setEssentials] = useState([]);
 
-  // Fetch products by type
   const fetchProducts = async (type, setProducts) => {
     try {
       const response = await fetch(`http://localhost:3000/products?type=${type}`);
@@ -19,7 +18,7 @@ const Header = () => {
         throw new Error('Failed to fetch products');
       }
       const data = await response.json();
-      setProducts(data.slice(0, 4)); // Get the first 4 products
+      setProducts(data.slice(0, 4)); 
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +45,7 @@ const Header = () => {
             className="border rounded-3xl overflow-hidden mt-8 relative"
             style={{
               width: "95%",
-              height: "600px", // Explicit height for alignment
+              height: "600px", 
               borderRadius: "30px",
             }}
           >

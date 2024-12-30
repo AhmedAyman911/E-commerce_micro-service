@@ -8,7 +8,6 @@ export default function Products() {
   const [error, setError] = useState(null);
   const location = useLocation();
 
-  // Extract 'type' from query string
   const searchParams = new URLSearchParams(location.search);
   const type = searchParams.get('type');
 

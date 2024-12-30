@@ -11,18 +11,18 @@ export class ProductController {
   @Get()
   async getProducts(@Query('type') type?: string): Promise<Product[]> {
     if (type) {
-      return this.productService.getProductsByType(type); // Fetch products filtered by type
+      return this.productService.getProductsByType(type); 
     }
-    return this.productService.getAllProducts(); // Fetch all products
+    return this.productService.getAllProducts(); 
   }
 
   @Get(':id')
   async getProductById(@Param('id') id: string): Promise<Product> {
-    return this.productService.getProductById(id); // Fetch product by ID
+    return this.productService.getProductById(id); 
   }
 
   @Post()
   async createProduct(@Body() product: Product): Promise<Product> {
-    return this.productService.create(product); // Add new product
+    return this.productService.create(product); 
   }
 }

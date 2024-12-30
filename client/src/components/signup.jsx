@@ -8,12 +8,12 @@ export default function Signup() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '', // Added phone field
+    phone: '', 
     password: '',
     confirmPassword: '',
   });
 
-  const [error, setError] = useState(''); // State to store error message
+  const [error, setError] = useState(''); 
   const [success, setSuccess] = useState('');
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +23,12 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
     try {
-      // Make the API call to signup endpoint
       const response = await axios.post('http://localhost:3000/auth/signup', {
         email: formData.email,
         password: formData.password,
@@ -37,27 +36,25 @@ export default function Signup() {
         name: formData.name,
       });
 
-      // Handle success
       setSuccess('Account created successfully!');
-      setError(''); // Clear error message
+      setError(''); 
       console.log('Response:', response.data);
     } catch (err) {
-      // Handle error
       setError(err.response?.data?.message || 'An error occurred during signup');
-      setSuccess(''); // Clear success message
+      setSuccess(''); 
       console.error('Error:', err);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 flex items-center justify-center">
+    <div className="min-h-screen bg-white text-gray-800 flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden flex w-4/5 max-w-4xl">
         {/* Image Section */}
         <div className="hidden md:flex w-1/2 justify-center items-center">
           <img
-            src={signupImage} // Use the imported image
+            src={signupImage} 
             alt="Signup Illustration"
-            className="w-3.5/4 h-auto object-contain" // Adjust the size and keep it centered
+            className="w-3.5/4 h-auto object-contain" 
           />
         </div>
 

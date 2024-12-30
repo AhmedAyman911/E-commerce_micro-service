@@ -28,7 +28,7 @@ const Cart = () => {
           const response = await axios.get(
             `http://localhost:3000/cart/${user.userId}`
           );
-          setCartItems(response.data.items); // Assuming the API response has an `items` array
+          setCartItems(response.data.items); 
         } catch (err) {
           setError("Failed to load cart data.");
         } finally {
@@ -45,7 +45,7 @@ const Cart = () => {
         `http://localhost:3000/cart/${user.userId}/${productId}/increase`,
         { amount: 1 }
       );
-      setCartItems(response.data.items); // Assuming API response includes updated cart
+      setCartItems(response.data.items); 
     } catch (error) {
       console.error("Error increasing quantity:", error);
     }
@@ -57,7 +57,7 @@ const Cart = () => {
         `http://localhost:3000/cart/${user.userId}/${productId}/decrease`,
         { amount: 1 }
       );
-      setCartItems(response.data.items); // Assuming API response includes updated cart
+      setCartItems(response.data.items); 
     } catch (error) {
       console.error("Error decreasing quantity:", error);
     }
@@ -93,9 +93,10 @@ const Cart = () => {
   return (
     <div className="p-5 max-w-4xl mx-auto">
       <h1 className="text-center text-2xl font-bold mb-5">Your Cart</h1>
+      <br></br>
       {cartItems.length > 0 ? (
         <>
-          <div className="grid grid-cols-4 gap-2 text-center items-center">
+          <div className="grid grid-cols-4 gap-4 text-center items-center">
             <div className="text-xl font-semibold border-b pb-2">PRODUCT</div>
             <div className="text-xl font-semibold border-b pb-2">PRICE</div>
             <div className="text-xl font-semibold border-b pb-2">QUANTITY</div>
@@ -106,10 +107,10 @@ const Cart = () => {
                   <img
                     src={item.photo}
                     alt={item.name}
-                    className="w-12 h-12 object-cover rounded"
+                    className="w-40 h-40 object-cover rounded"
                   />
                   <div>
-                    <p className="text-gray-900 text-lg">{item.name}</p>
+                    <p className="text-gray-900 font-semibold text-base">{item.name}</p>
             
                   </div>
                 </div>
@@ -143,6 +144,7 @@ const Cart = () => {
               </React.Fragment>
             ))}
           </div>
+          <br></br>
           <div className="mt-10 mx-auto p-5 border rounded bg-gray-100 max-w-sm text-center">
             <h2 className="text-xl font-bold mb-3">Order Summary</h2>
             <p className="text-xl">Subtotal: ${subtotal}</p>

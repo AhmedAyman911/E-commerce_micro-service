@@ -8,8 +8,8 @@ import { CartModule } from './cart/cart.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
-import * as dotenv from 'dotenv'; // Import dotenv
-dotenv.config(); // Load environment variables
+import * as dotenv from 'dotenv'; 
+dotenv.config(); 
 
 @Module({
   imports: [

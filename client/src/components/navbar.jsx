@@ -14,7 +14,7 @@ export default function NavBar() {
 
     const handleNavigation = (path) => {
         navigate(path);
-        setIsSidebarOpen(false); // Close sidebar after navigation
+        setIsSidebarOpen(false);  
     };
 
     const openExternalLink = (url) => {

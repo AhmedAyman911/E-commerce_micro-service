@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios'; // Import Axios for HTTP requests
+import axios from 'axios'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import loginImage from '../assets/bwink_bld_03_single_03.jpg'; // Import your image
+import loginImage from '../assets/bwink_bld_03_single_03.jpg'; 
 import { getUserData, isTokenValid } from '../tokenUtils.js';
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -12,49 +12,47 @@ export default function Login() {
   const [user, setUser] = useState(null);
   const handleLogin = async (event) => {
     event.preventDefault();
-    setLoading(true); // Start loading
-    setError(''); // Clear previous errors
+    setLoading(true); 
+    setError(''); 
 
     try {
       const response = await axios.post('http://localhost:3000/auth/login', {
         email,
         password,
       });
-      // Save the token immediately
     const token = response.data.access_token;
     localStorage.setItem('token', token);
 
     console.log('Login successful:', response.data);
 
-    // Decode the token to get user data
-    const userData = getUserData(); // Decode token to get user info
+    const userData = getUserData(); 
     setUser(userData);
 
-    // Create or ensure the cart exists using the decoded user ID
+    
     await axios.post(
       `http://localhost:3000/cart/${userData.userId}/create`,
       {},
       {
-        headers: { Authorization: `Bearer ${token}` }, // Pass the token in the headers
+        headers: { Authorization: `Bearer ${token}` }, 
       }
     );
-      window.location.href = '/profile'; // Redirect to dashboard
+      window.location.href = '/profile'; 
     } catch (err) {
-      // Handle login error
+     
       console.error('Login error:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'An error occurred. Please try again.');
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 flex items-center justify-center">
+    <div className="min-h-screen bg-white-50 text-gray-800 flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden flex w-4/5 max-w-4xl border border-gray-200">
         {/* Image Section */}
         <div className="hidden md:block w-1/2">
           <img
-            src={loginImage} // Use the imported image
+            src={loginImage} 
             alt="Login Illustration"
             className="w-full h-full object-cover"
           />
