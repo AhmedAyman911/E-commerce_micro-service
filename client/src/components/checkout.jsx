@@ -129,23 +129,23 @@ export default function Checkout() {
               />
               <div className="flex-col">
                 <p className="text-md text-black px-2 mt-2">{item.name}</p>
-                <p className="text-sm text-gray-500 px-2">Quantity: {item.quantity}</p>
+                <p className="text-base text-gray-700 px-2">Quantity: {item.quantity}</p>
               </div>
             </div>
-            <p className="text-md text-black mt-10 ml-4 md:ml-64">
-              {item.price.toFixed(2)} <span className="text-green-300">$</span>
+            <p className="text-lg text-black mt-10 ml-4 md:ml-64">
+              {item.price.toFixed(2) * item.quantity} <span className="text-pink-700 text-lg">LE</span>
             </p>
           </div>
         ))}
 
         <hr className="border-t-2 border-black-300 mt-2" />
         <div className="flex justify-between">
-          <p className="text-md font-bold text-black mt-4">Total</p>
-          <p className="text-md text-black font-bold mt-4">
+          <p className="text-lg font-semibold text-black mt-4">Total</p>
+          <p className="text-lg text-black font-semibold mt-4">
             {cartItems
               .reduce((total, item) => total + item.price * item.quantity, 0)
               .toFixed(2)}{" "}
-            <span className="text-green-300">$</span>
+            <span className="text-pink-700">LE</span>
           </p>
         </div>
       </div>
