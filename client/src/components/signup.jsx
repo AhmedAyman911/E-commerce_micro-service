@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faPhone } from '@fortawesome/free-solid-svg-icons';
-import loginImage from '../assets/bwink_bld_03_single_03.jpg';
+import signupImage from '../assets/bwink_bld_03_single_03.jpg';
 import axios from 'axios';
 
 export default function Signup() {
@@ -47,36 +47,33 @@ export default function Signup() {
       setSuccess(''); // Clear success message
       console.error('Error:', err);
     }
-    // Add your form submission logic here
-    console.log('Form Submitted:', formData);
-    setError(''); // Clear error if passwords match
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="bg-gray-900 shadow-lg rounded-lg overflow-hidden flex w-4/5 max-w-4xl">
+    <div className="min-h-screen bg-gray-50 text-gray-800 flex items-center justify-center">
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden flex w-4/5 max-w-4xl">
         {/* Image Section */}
-        <div className="hidden md:block w-1/2">
+        <div className="hidden md:flex w-1/2 justify-center items-center">
           <img
-            src={loginImage} // Use the imported image
+            src={signupImage} // Use the imported image
             alt="Signup Illustration"
-            className="w-full h-full object-cover"
+            className="w-3.5/4 h-auto object-contain" // Adjust the size and keep it centered
           />
         </div>
 
         {/* Form Section */}
         <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-bold text-center text-white mb-6">
+          <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">
             Create an Account
           </h2>
-          <p className="text-center text-gray-400 mb-6">
+          <p className="text-center text-gray-500 mb-6">
             Sign up to start your journey
           </p>
 
           <form onSubmit={handleSubmit}>
             {/* Full Name Input */}
             <div className="mb-6">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                 Full Name
               </label>
               <div className="relative mt-1">
@@ -88,14 +85,14 @@ export default function Signup() {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter your full name"
-                  className="block w-full pl-3 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-3 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Email Input */}
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email
               </label>
               <div className="relative mt-1">
@@ -110,14 +107,14 @@ export default function Signup() {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter your email"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Phone Number Input */}
             <div className="mb-6">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                 Phone Number
               </label>
               <div className="relative mt-1">
@@ -132,14 +129,14 @@ export default function Signup() {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter your phone number"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Password Input */}
             <div className="mb-6">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="relative mt-1">
@@ -154,14 +151,14 @@ export default function Signup() {
                   onChange={handleInputChange}
                   required
                   placeholder="Create a password"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Confirm Password Input */}
             <div className="mb-6">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                 Confirm Password
               </label>
               <div className="relative mt-1">
@@ -176,7 +173,7 @@ export default function Signup() {
                   onChange={handleInputChange}
                   required
                   placeholder="Confirm your password"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -190,15 +187,15 @@ export default function Signup() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 px-4 rounded-md text-lg font-semibold border border-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
+              className="w-full bg-pink-500 text-white py-3 px-4 rounded-md text-lg font-semibold hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
             >
               Sign Up
             </button>
           </form>
 
-          <p className="text-center text-gray-400 mt-6">
+          <p className="text-center text-gray-500 mt-6">
             Already have an account?{' '}
-            <a href="/login" className="text-white underline hover:text-gray-400">
+            <a href="/login" className="text-pink-600 underline hover:text-pink-500">
               Log in
             </a>
           </p>

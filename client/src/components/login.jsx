@@ -49,8 +49,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="bg-gray-900 shadow-lg rounded-lg overflow-hidden flex w-4/5 max-w-4xl">
+    <div className="min-h-screen bg-gray-50 text-gray-800 flex items-center justify-center">
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden flex w-4/5 max-w-4xl border border-gray-200">
         {/* Image Section */}
         <div className="hidden md:block w-1/2">
           <img
@@ -62,10 +62,10 @@ export default function Login() {
 
         {/* Form Section */}
         <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-bold text-center text-white mb-6">
+          <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">
             Welcome Back
           </h2>
-          <p className="text-center text-gray-400 mb-6">
+          <p className="text-center text-gray-500 mb-6">
             Log in to access your account
           </p>
 
@@ -74,7 +74,7 @@ export default function Login() {
           <form onSubmit={handleLogin}>
             {/* Email Input */}
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email
               </label>
               <div className="relative mt-1">
@@ -88,14 +88,14 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="Enter your email"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Password Input */}
             <div className="mb-6">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="relative mt-1">
@@ -109,7 +109,7 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="Enter your password"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -117,16 +117,16 @@ export default function Login() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 px-4 rounded-md text-lg font-semibold border border-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
+              className="w-full bg-pink-600 text-white py-3 px-4 rounded-md text-lg font-semibold hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
               disabled={loading}
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
 
-          <p className="text-center text-gray-400 mt-6">
+          <p className="text-center text-gray-500 mt-6">
             Don`t have an account?{' '}
-            <a href="/signup" className="text-white underline hover:text-gray-400">
+            <a href="/signup" className="text-pink-600 underline hover:text-pink-500">
               Sign up
             </a>
           </p>
