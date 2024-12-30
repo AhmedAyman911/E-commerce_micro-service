@@ -3,13 +3,13 @@ import axios from 'axios'; // Import Axios for HTTP requests
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import loginImage from '../assets/bwink_bld_03_single_03.jpg'; // Import your image
-
+import { getUserData, isTokenValid } from '../tokenUtils.js';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [user, setUser] = useState(null);
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true); // Start loading
@@ -20,12 +20,24 @@ export default function Login() {
         email,
         password,
       });
+      // Save the token immediately
+    const token = response.data.access_token;
+    localStorage.setItem('token', token);
 
-      // Handle successful login
-      console.log('Login successful:', response.data);
+    console.log('Login successful:', response.data);
 
-      // Save token or redirect as needed
-      localStorage.setItem('token', response.data.access_token);
+    // Decode the token to get user data
+    const userData = getUserData(); // Decode token to get user info
+    setUser(userData);
+
+    // Create or ensure the cart exists using the decoded user ID
+    await axios.post(
+      `http://localhost:3000/cart/${userData.userId}/create`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` }, // Pass the token in the headers
+      }
+    );
       window.location.href = '/profile'; // Redirect to dashboard
     } catch (err) {
       // Handle login error

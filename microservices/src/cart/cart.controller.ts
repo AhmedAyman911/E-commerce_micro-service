@@ -55,55 +55,14 @@ export class CartController {
   ) {
     return this.cartService.decreaseQuantity(uid, itemId, amount);
   }
-
-}
-
-/*
-  @Post()
-  async createOrder(@Body() cartData: Partial<Cart>): Promise<Cart> {
-    try {
-      return await this.cartService.createCart(cartData);
-    } catch (error) {
-      throw new HttpException('Failed to create cart', HttpStatus.BAD_REQUEST);
-    }
+  @Delete(':uid')
+  async clearCart(@Param('uid') userId: string): Promise<{ message: string }> {
+      try {
+          await this.cartService.clearCart(userId); // Implement clearCart in your cart service
+          return { message: 'Cart cleared successfully' };
+      } catch (error) {
+          throw new HttpException('Failed to clear cart', HttpStatus.INTERNAL_SERVER_ERROR);
+      }
   }
-  @Get()
-  async getAllCarts(): Promise<Cart[]> {
-    console.log('Fetching all Cartss...');
-    return await this.cartService.getAllCarts();
-  }*/
-
-
-/*
-@Get(':uid')
-async getCart(@Param('uid') uid: string) {
-  return this.cartService.getCartByUserId(uid);
+  
 }
-
-@Patch(':uid/add')
-async addItem(
-  @Param('uid') uid: string,
-  @Body('item') item: {
-    productId: string;
-    name: string;
-    quantity: number;
-    price: number;
-    photo: string;
-  },
-) {
-  return this.cartService.addItemToCart(uid, item);
-}
-
-@Patch(':uid/remove/:productId')
-async removeItem(
-  @Param('uid') uid: string,
-  @Param('productId') productId: string,
-) {
-  return this.cartService.removeItemFromCart(uid, productId);
-}
-
-@Delete(':uid/clear')
-async clearCart(@Param('uid') uid: string) {
-  return this.cartService.clearCart(uid);
-}*/
-

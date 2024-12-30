@@ -1,4 +1,4 @@
-import { Injectable, Inject, NotFoundException,BadRequestException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, BadRequestException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cart } from './cart.model';
@@ -9,11 +9,6 @@ export class CartService {
   constructor(
     @InjectModel('Cart') private readonly cartModel: Model<Cart>,
   ) { }
-  /*
-    async createCart(cartData: Partial<Cart>): Promise<Cart> {
-      const cart = new this.cartModel(cartData);
-      return await cart.save();
-    }*/
 
   async getAllCarts(): Promise<Cart[]> {
     return await this.cartModel.find().exec();
@@ -23,9 +18,10 @@ export class CartService {
     const existingCart = await this.cartModel.findOne({ uid }).exec();
 
     if (existingCart) {
-      throw new Error('Cart already exists for this user.');
+      console.log(`Cart already exists for user with uid: ${uid}`);
+      return existingCart; // Return the existing cart
     }
-
+    console.log(`Creating a new cart for user with uid: ${uid}`);
     const newCart = new this.cartModel({ uid, items: [] });
     return await newCart.save();
   }
@@ -112,6 +108,13 @@ export class CartService {
     return cart.save();
   }
 
+  async clearCart(uid: string): Promise<void> {
+    await this.cartModel.findOneAndUpdate(
+      { uid },
+      { $set: { items: [] } },
+      { new: true }
+    );
+  }
 
 
 
