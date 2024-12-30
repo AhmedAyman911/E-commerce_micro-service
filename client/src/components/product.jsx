@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getUserData, isTokenValid } from '../tokenUtils.js';
+import { useParams, useNavigate } from "react-router-dom";
+import { getUserData, isTokenValid } from "../tokenUtils.js";
 import axios from "axios";
 
 export default function ProductPage() {
@@ -11,6 +11,8 @@ export default function ProductPage() {
 
   // Get info from token
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const tokenIsValid = isTokenValid();
     if (tokenIsValid) {
@@ -82,6 +84,10 @@ export default function ProductPage() {
     }
   };
 
+  const buyItNow = () => {
+    navigate("/checkout");
+  };
+
   if (loading) {
     return <p className="text-gray-700 text-center">Loading product details...</p>;
   }
@@ -114,12 +120,13 @@ export default function ProductPage() {
 
           <div className="flex items-center space-x-2 mt-4">
             <span
-              className={`text-lg font-medium ${product.stock.startsWith("Low stock")
+              className={`text-lg font-medium ${
+                product.stock.startsWith("Low stock")
                   ? "text-yellow-500"
                   : product.stock.startsWith("In stock")
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
             >
               {product.stock.startsWith("Low stock")
                 ? `${product.stock} (${product.n_items} items left)`
@@ -134,7 +141,10 @@ export default function ProductPage() {
             >
               ADD TO CART
             </button>
-            <button className="w-full py-3 px-6 bg-pink-700 text-white font-semibold rounded-lg hover:bg-pink-500 transition mt-3">
+            <button
+              className="w-full py-3 px-6 bg-pink-700 text-white font-semibold rounded-lg hover:bg-pink-500 transition mt-3"
+              onClick={buyItNow}
+            >
               BUY IT NOW
             </button>
           </div>

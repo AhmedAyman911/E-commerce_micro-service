@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+
 export default function Footer() {
     return (
         <footer className="bg-black text-white pt-10">
@@ -34,9 +35,21 @@ export default function Footer() {
                     <div className="w-full sm:w-1/2 lg:w-1/4 mb-6">
                         <h4 className="text-lg font-semibold mb-4">Connect</h4>
                         <ul className="flex space-x-4">
-                            <li><a href="#" className="hover:text-blue-700"><FaFacebook size={24} /></a></li>
-                            <li><a href="#" className="hover:text-red-400"><FaInstagram size={24} /></a></li>
-                            <li><a href="#" className="hover:text-gray-400"><FaTiktok size={24} /></a></li>
+                            <li>
+                                <a href="https://www.facebook.com/your-page" className="hover:text-blue-700" target="_blank" rel="noopener noreferrer">
+                                    <FaFacebook size={24} />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/your-profile" className="hover:text-red-400" target="_blank" rel="noopener noreferrer">
+                                    <FaInstagram size={24} />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.tiktok.com/@your-username" className="hover:text-gray-400" target="_blank" rel="noopener noreferrer">
+                                    <FaTiktok size={24} />
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
