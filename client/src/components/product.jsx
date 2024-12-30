@@ -4,12 +4,11 @@ import { getUserData, isTokenValid } from "../tokenUtils.js";
 import axios from "axios";
 
 export default function ProductPage() {
-  const { id } = useParams(); // Get product ID from URL parameters
+  const { id } = useParams(); 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Get info from token
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -51,33 +50,29 @@ export default function ProductPage() {
     const payload = {
       productId: product._id,
       name: product.name,
-      quantity: 1, // Default quantity
+      quantity: 1, 
       price: numericPrice,
       photo: product.image,
     };
-
+  
     console.log("Sending payload:", payload);
-
+  
     try {
       const response = await axios.put(
         `http://localhost:3000/cart/${user.userId}/update`,
         payload
       );
-
+  
       console.log("Response from server:", response.data);
-      //alert("Product added to cart successfully!");
     } catch (error) {
       if (error.response) {
-        // Server responded with a status code outside the range of 2xx
         console.error("Error response data:", error.response.data);
         console.error("Error status:", error.response.status);
         alert(`Failed to add product to cart: ${error.response.data.message}`);
       } else if (error.request) {
-        // No response received
         console.error("No response received:", error.request);
         alert("Failed to add product to cart: No response from server.");
       } else {
-        // Other errors
         console.error("Error:", error.message);
         alert("An unexpected error occurred.");
       }

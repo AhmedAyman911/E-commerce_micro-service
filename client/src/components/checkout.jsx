@@ -9,10 +9,8 @@ export default function Checkout() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Get info from token
   const [user, setUser] = useState(null);
 
-  // Form state variables
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -23,7 +21,6 @@ export default function Checkout() {
   const [orderSuccess, setOrderSuccess] = useState(null);
   const [orderError, setOrderError] = useState(null);
 
-  // Fetch user data on mount
   useEffect(() => {
     const tokenIsValid = isTokenValid();
     if (tokenIsValid) {
@@ -34,7 +31,6 @@ export default function Checkout() {
     }
   }, [navigate]);
 
-  // Fetch cart data
   useEffect(() => {
     const fetchCart = async () => {
       if (user) {
@@ -53,13 +49,13 @@ export default function Checkout() {
   const clearCart = async () => {
     try {
       await axios.delete(`http://localhost:3000/cart/${user.userId}`);
-      setCartItems([]); // Clear the cart items in the frontend
+      setCartItems([]); 
     } catch (err) {
       console.error("Failed to clear cart:", err);
     }
   };
 
-  // Populate form fields with user data
+
   useEffect(() => {
     if (user) {
       setFullName(user.name || "");

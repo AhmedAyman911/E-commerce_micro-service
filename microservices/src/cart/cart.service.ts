@@ -41,14 +41,13 @@ export class CartService {
       throw new NotFoundException('Cart not found for this user.');
     }
 
-    // Find the item to remove
     const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
 
     if (itemIndex === -1) {
       throw new NotFoundException('Item not found in cart.');
     }
 
-    // Remove the item from the cart
+    
     cart.items.splice(itemIndex, 1);
 
     return cart.save();
@@ -67,9 +66,9 @@ export class CartService {
     );
 
     if (existingProduct) {
-      existingProduct.quantity += product.quantity; // Update quantity
+      existingProduct.quantity += product.quantity; 
     } else {
-      cart.items.push(product); // Add new product
+      cart.items.push(product); 
     }
 
     return cart.save();

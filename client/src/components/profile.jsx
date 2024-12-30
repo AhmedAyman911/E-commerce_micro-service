@@ -8,7 +8,6 @@ const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [activeSection, setActiveSection] = useState('info');
 
-  // get info from token
   const [user, setUser] = useState(null);
   useEffect(() => {
     const tokenIsValid = isTokenValid();
@@ -47,7 +46,6 @@ const UserProfile = () => {
 
 
   const [orders, setOrders] = useState([]);
-  // Fetch orders
   const fetchOrders = async () => {
     try {
       setLoading(true);
@@ -61,7 +59,6 @@ const UserProfile = () => {
     }
   };
 
-  // Handle view change
   const handleSectionChange = (section) => {
     setActiveSection(section);
     if (section === 'orders') {
@@ -129,7 +126,7 @@ const UserProfile = () => {
   }
 
   const handleEditToggle = () => {
-    setIsEditing((prev) => !prev); // Toggle the edit mode
+    setIsEditing((prev) => !prev); 
   };
 
   const userOrders = orders.filter((order) => order.uid === user?.userId);
@@ -163,8 +160,8 @@ const UserProfile = () => {
           </button>
           <button
             onClick={() => {
-              localStorage.removeItem('token'); // Clear token
-              window.location.href = '/login'; // Redirect to login page
+              localStorage.removeItem('token'); 
+              window.location.href = '/login'; 
             }}
             className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg font-medium text-red-700"
           >
@@ -187,7 +184,7 @@ const UserProfile = () => {
                 name="name"
                 value={editableUser.name || ''}
                 onChange={handleInputChange}
-                disabled={!isEditing} // Disable when not editing
+                disabled={!isEditing} 
                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditing ? 'bg-gray-200' : ''}`}
               />
             </div>
@@ -200,7 +197,7 @@ const UserProfile = () => {
                 name="email"
                 value={editableUser.email || ''}
                 onChange={handleInputChange}
-                disabled={!isEditing} // Disable when not editing
+                disabled={!isEditing}
                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditing ? 'bg-gray-200' : ''}`}
               />
             </div>
@@ -213,7 +210,7 @@ const UserProfile = () => {
                 name="address"
                 value={editableUser.address || ''}
                 onChange={handleInputChange}
-                disabled={!isEditing} // Disable when not editing
+                disabled={!isEditing} 
                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditing ? 'bg-gray-200' : ''}`}
               />
             </div>
@@ -226,7 +223,7 @@ const UserProfile = () => {
                 name="phone"
                 value={editableUser.phone || ''}
                 onChange={handleInputChange}
-                disabled={!isEditing} // Disable when not editing
+                disabled={!isEditing} 
                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditing ? 'bg-gray-200' : ''}`}
               />
             </div>

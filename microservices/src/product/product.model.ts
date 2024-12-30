@@ -47,6 +47,6 @@ export const ProductSchema = new Schema(
     },
   },
   {
-    collection: 'products', // Explicitly set the collection name
+    collection: 'products', 
   }
 );

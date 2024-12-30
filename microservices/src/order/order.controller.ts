@@ -6,7 +6,6 @@ import { Order } from './order.model';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  // Create a new order
   @Post()
   async createOrder(@Body() orderData: Partial<Order>): Promise<Order> {
     try {
@@ -16,14 +15,12 @@ export class OrderController {
     }
   }
 
-  // Get all orders
   @Get()
   async getAllOrders(): Promise<Order[]> {
     console.log('Fetching all orders...');
     return await this.orderService.getAllOrders();
   }
 
-  // Get a single order by ID
   @Get(':id')
   async getOrderById(@Param('id') orderId: string): Promise<Order> {
     const order = await this.orderService.getOrderById(orderId);
@@ -33,7 +30,6 @@ export class OrderController {
     return order;
   }
 
-  // Update an order status
   @Put(':id/status')
   async updateOrderStatus(
     @Param('id') orderId: string,
@@ -46,7 +42,6 @@ export class OrderController {
     return updatedOrder;
   }
   
-  // Update an order address
   @Put(':id/address')
   async updateOrderAddress(
     @Param('id') orderId: string,
@@ -58,7 +53,6 @@ export class OrderController {
     }
     return updatedOrder;
   }
-  // Delete an order
   @Delete(':id')
   async deleteOrder(@Param('id') orderId: string): Promise<Order> {
     const deletedOrder = await this.orderService.deleteOrder(orderId);
