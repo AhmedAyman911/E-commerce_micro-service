@@ -140,7 +140,7 @@ const UserProfile = () => {
       <div className="w-1/4 bg-white shadow-lg p-6">
         <div className="text-center mb-6">
           <img
-            src="https://via.placeholder.com/100"
+            src="https://i.pinimg.com/736x/3b/73/48/3b73483fa5af06e3ba35f4f71e541e7a.jpg"
             alt="User"
             className="w-24 h-24 rounded-full mx-auto mb-4"
           />

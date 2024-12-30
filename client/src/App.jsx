@@ -11,24 +11,27 @@ import Header from './components/homepage.jsx';
 import Cart from './components/cart.jsx';
 
 export default function App() {
-  
+
   return (
     <Router>
-      <NavBar/>
-        <Routes>
-          {/*user routes*/}
-          <Route path="/login" element={<Login />} />
-          <Route path="/Profile" element={<Profile/>}/>
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Header />} />
-          <Route path="/cart" element={<Cart />} />
-
-        </Routes>
-        <Footer/>
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <main className="flex-1">
+          <Routes>
+            {/*user routes*/}
+            <Route path="/login" element={<Login />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/home" element={<Header />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }
