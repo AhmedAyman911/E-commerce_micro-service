@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Schema,Document,model,Types } from 'mongoose';
 
 export interface Cart extends Document {

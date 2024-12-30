@@ -12,9 +12,10 @@ export interface Order extends Document {
         name: string;
         quantity: number;
         price: number;
+        photo: String
     }[];
     readonly totalAmount: number;
-    readonly paymentMethod: 'credit_card' | 'paypal' | 'cash_on_delivery';
+    readonly paymentMethod: 'credit_card' | 'paypal' | '"cash"';
     readonly orderStatus: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'canceled';
 }
 
@@ -70,7 +71,7 @@ export const OrderSchema = new Schema({
     },
     paymentMethod: {
         type: String,
-        enum: ['credit_card', 'paypal', 'cash_on_delivery'],
+        enum: ['credit_card', 'paypal', 'cash'],
         required: true,
     },
     orderStatus: {

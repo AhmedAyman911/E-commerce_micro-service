@@ -96,10 +96,10 @@ const Cart = () => {
       {cartItems.length > 0 ? (
         <>
           <div className="grid grid-cols-4 gap-2 text-center items-center">
-            <div className="font-bold border-b pb-2">PRODUCT</div>
-            <div className="font-bold border-b pb-2">PRICE</div>
-            <div className="font-bold border-b pb-2">QUANTITY</div>
-            <div className="font-bold border-b pb-2">TOTAL</div>
+            <div className="text-xl font-semibold border-b pb-2">PRODUCT</div>
+            <div className="text-xl font-semibold border-b pb-2">PRICE</div>
+            <div className="text-xl font-semibold border-b pb-2">QUANTITY</div>
+            <div className="text-xl font-semibold border-b pb-2">TOTAL</div>
             {cartItems.map((item) => (
               <React.Fragment key={item.productId}>
                 <div className="flex items-center gap-3 text-left p-2">
@@ -109,11 +109,11 @@ const Cart = () => {
                     className="w-12 h-12 object-cover rounded"
                   />
                   <div>
-                    <p>{item.name}</p>
-                    <p className="text-gray-500 text-sm">{item.color}</p>
+                    <p className="text-gray-900 text-lg">{item.name}</p>
+            
                   </div>
                 </div>
-                <div>${item.price}</div>
+                <div className="text-gray-900 text-lg">{item.price} LE</div>
                 <div className="flex items-center justify-center gap-2">
                   <button
                     className="border px-2 py-1 bg-pink-700 text-white rounded hover:bg-pink-500"
@@ -121,7 +121,7 @@ const Cart = () => {
                   >
                     -
                   </button>
-                  <span>{item.quantity}</span>
+                  <span className="text-gray-900 text-lg">{item.quantity}</span>
                   <button
                     className="border px-2 py-1 bg-pink-700 text-white rounded hover:bg-pink-500"
                     onClick={() => handleIncrease(item.productId)}
@@ -130,8 +130,8 @@ const Cart = () => {
                   </button>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-center w-full">
-                    ${item.price * item.quantity}
+                  <span className="text-center w-full text-lg">
+                    {item.price * item.quantity} LE
                   </span>
                   <button
                     className="text-red-500 hover:bg-red-500 hover:text-white px-2 py-1 rounded ml-3"
@@ -144,14 +144,14 @@ const Cart = () => {
             ))}
           </div>
           <div className="mt-10 mx-auto p-5 border rounded bg-gray-100 max-w-sm text-center">
-            <h2 className="text-lg font-bold mb-3">Order Summary</h2>
-            <p>Subtotal: ${subtotal}</p>
-            <p>Shipping: Free</p>
+            <h2 className="text-xl font-bold mb-3">Order Summary</h2>
+            <p className="text-xl">Subtotal: ${subtotal}</p>
+            <p className="text-xl">Shipping: Free</p>
             <button
-              className="w-full py-2 mt-3 bg-pink-700 text-white font-bold rounded hover:bg-pink-500"
+              className="w-full py-2 mt-3 bg-pink-700 text-white font-semibold rounded hover:bg-pink-500 text-xl"
               onClick={Checkout}
             >
-              CHECKOUT
+              Checkout
             </button>
           </div>
         </>
